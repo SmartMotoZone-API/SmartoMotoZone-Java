@@ -1,3 +1,4 @@
+// Zona.java
 package com.smartmotozone.api.smartmotozone_api.model;
 
 import jakarta.persistence.*;

@@ -1,26 +1,28 @@
-// Moto.java
+// Movimentacao.java
 package com.smartmotozone.api.smartmotozone_api.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.*;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Moto {
+public class Movimentacao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    private String modelo;
-
-    @NotBlank
-    private String status;
+    @ManyToOne
+    private Moto moto;
 
     @ManyToOne
-    @JoinColumn(name = "zona_id")
-    private Zona zona;
+    private Zona zonaOrigem;
+
+    @ManyToOne
+    private Zona zonaDestino;
+
+    private LocalDateTime dataHora;
 }

@@ -1,4 +1,4 @@
-// Moto.java
+// Usuario.java
 package com.smartmotozone.api.smartmotozone_api.model;
 
 import jakarta.persistence.*;
@@ -9,18 +9,20 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Moto {
+public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank
-    private String modelo;
+    private String nome;
 
     @NotBlank
-    private String status;
+    private String perfil;
 
-    @ManyToOne
-    @JoinColumn(name = "zona_id")
-    private Zona zona;
+    @NotBlank
+    private String login;
+
+    @NotBlank
+    private String senha;
 }
