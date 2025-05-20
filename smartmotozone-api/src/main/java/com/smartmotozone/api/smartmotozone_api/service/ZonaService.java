@@ -1,9 +1,9 @@
 package com.smartmotozone.api.smartmotozone_api.service;
 
 import com.smartmotozone.api.smartmotozone_api.dto.ZonaDTO;
+import com.smartmotozone.api.smartmotozone_api.exception.ResourceNotFoundException;
 import com.smartmotozone.api.smartmotozone_api.model.Zona;
 import com.smartmotozone.api.smartmotozone_api.repository.ZonaRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,7 +29,8 @@ public class ZonaService {
 
     public Zona buscarPorId(Long id) {
         return zonaRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Zona não encontrada"));
+                .orElseThrow(() -> new ResourceNotFoundException("Zona não encontrada"));
+
     }
 
     public void deletar(Long id) {

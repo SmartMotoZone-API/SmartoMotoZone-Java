@@ -18,6 +18,9 @@ public class Moto {
     private String modelo;
 
     @NotBlank
+    private String placa;
+
+    @NotBlank
     private String status;
 
     @ManyToOne
