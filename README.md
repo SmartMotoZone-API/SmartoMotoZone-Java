@@ -1,7 +1,3 @@
-
----
-
-`markdown
 # 🛵 SmartMotoZone API
 
 API RESTful desenvolvida com **Java Spring Boot** para rastreamento e gerenciamento de motos em zonas virtuais, simulando o uso de **beacons** em pátios logísticos.
@@ -167,6 +163,3 @@ Este projeto é parte de um desafio acadêmico com foco em boas práticas de arq
 
 
 ---
-
-
-```
