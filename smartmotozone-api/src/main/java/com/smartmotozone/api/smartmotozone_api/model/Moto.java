@@ -1,4 +1,4 @@
-package com.smartmotozone.model;
+package com.smartmotozone.api.smartmotozone_api.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -6,23 +6,22 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Zona {
+public class Moto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank
-    private String codigo;
+    private String modelo;
 
     @NotBlank
-    private String descricao;
+    private String status;
 
-    @OneToMany(mappedBy = "zona")
-    private List<Moto> motos;
+    @ManyToOne
+    @JoinColumn(name = "zona_id")
+    private Zona zona;
 }
