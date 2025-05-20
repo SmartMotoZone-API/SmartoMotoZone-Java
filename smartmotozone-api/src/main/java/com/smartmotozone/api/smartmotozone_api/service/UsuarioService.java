@@ -5,7 +5,6 @@ import com.smartmotozone.api.smartmotozone_api.exception.BusinessException;
 import com.smartmotozone.api.smartmotozone_api.exception.ResourceNotFoundException;
 import com.smartmotozone.api.smartmotozone_api.model.Usuario;
 import com.smartmotozone.api.smartmotozone_api.repository.UsuarioRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
