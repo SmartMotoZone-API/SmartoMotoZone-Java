@@ -162,6 +162,3 @@ Este projeto é parte de um desafio acadêmico com foco em boas práticas de arq
 
 
 ---
-
-
-```
