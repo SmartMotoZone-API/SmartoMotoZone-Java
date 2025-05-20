@@ -29,5 +29,7 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+smartmotozone-api/Oracle_JDK-24/
+
 ### VS Code ###
 .vscode/
