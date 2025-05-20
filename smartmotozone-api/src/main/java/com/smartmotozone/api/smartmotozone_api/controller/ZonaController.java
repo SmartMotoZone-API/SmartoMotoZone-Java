@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
+
+import java.util.List;
+
 import static org.springframework.http.HttpStatus.NO_CONTENT;
 
 @RestController
@@ -53,4 +56,11 @@ public class ZonaController {
         zonaService.deletar(id);
         return ResponseEntity.status(NO_CONTENT).build();
     }
+
+    @GetMapping("/buscar")
+    public ResponseEntity<List<Zona>> buscarPorDescricao(@RequestParam String descricao) {
+    var zonas = zonaService.buscarPorDescricao(descricao);
+    return ResponseEntity.ok(zonas);
+}
+
 }

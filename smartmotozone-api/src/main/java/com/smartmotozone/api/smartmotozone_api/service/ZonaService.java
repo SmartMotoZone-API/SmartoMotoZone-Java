@@ -4,6 +4,9 @@ import com.smartmotozone.api.smartmotozone_api.dto.ZonaDTO;
 import com.smartmotozone.api.smartmotozone_api.exception.ResourceNotFoundException;
 import com.smartmotozone.api.smartmotozone_api.model.Zona;
 import com.smartmotozone.api.smartmotozone_api.repository.ZonaRepository;
+
+import java.util.List;
+
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -43,4 +46,9 @@ public class ZonaService {
         zona.setDescricao(dto.descricao());
         return zonaRepository.save(zona);
     }
+
+    public List<Zona> buscarPorDescricao(String descricao) {
+    return zonaRepository.findByDescricaoContainingIgnoreCase(descricao);
+}
+
 }
