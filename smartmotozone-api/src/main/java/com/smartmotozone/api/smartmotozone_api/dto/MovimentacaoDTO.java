@@ -1,12 +1,13 @@
 package com.smartmotozone.api.smartmotozone_api.dto;
 
+import java.time.LocalDateTime;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public record MotoDTO(
+public record MovimentacaoDTO(
     Long id,
-    @NotBlank String modelo,
-    @NotBlank String placa,
-    @NotNull Long zonaId
+    @NotNull Long motoId,
+    @NotBlank String descricao,
+    @NotNull LocalDateTime dataHora
 ) {}
-
