@@ -123,6 +123,7 @@ Exceções são tratadas de forma centralizada usando `@ControllerAdvice`, retor
 
 bash
 git clone https://github.com/SmartMotoZone-API/smart-moto-zone-api.git
+
 cd smartmotozone
 
 
@@ -155,7 +156,7 @@ json
 
 **Kaio Cumpian Silva**
 FIAP – Java Advanced
-GitHub: [https://github.com/seu-usuario](https://github.com/seu-usuario)
+GitHub: [https://github.com/KaioCumpian](https://github.com/KaioCumpian)
 
 ---
 
