@@ -6,6 +6,8 @@ import com.smartmotozone.api.smartmotozone_api.model.Moto;
 import com.smartmotozone.api.smartmotozone_api.model.Zona;
 import com.smartmotozone.api.smartmotozone_api.repository.MotoRepository;
 import com.smartmotozone.api.smartmotozone_api.repository.ZonaRepository;
+
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,24 +26,28 @@ public class MotoService {
         this.zonaRepository = zonaRepository;
     }
 
-    @Cacheable("motos")
+    @Cacheable(value = "motos", key = "#pageable.pageNumber + '-' + #pageable.pageSize + '-' + #pageable.sort")
     public Page<Moto> listarTodos(Pageable pageable) {
         return motoRepository.findAll(pageable);
     }
 
+    @Cacheable(value = "motoPormodelo", key = "#modelo + '-' + #pageable.pageNumber + '-' + #pageable.pageSize + '-' + #pageable.sort")
     public Page<Moto> buscarPorModelo(String modelo, Pageable pageable) {
         return motoRepository.findByModeloContainingIgnoreCase(modelo, pageable);
     }
 
+    @Cacheable(value = "motoPorZonacodigo", key = "#codigoZona")
     public List<Moto> buscarPorZonaCodigo(String codigoZona) {
         return motoRepository.findByZonaCodigo(codigoZona);
     }
 
+    @Cacheable(value = "motoPorId", key = "#id")
     public Moto buscarPorId(Long id) {
         return motoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Moto não encontrada"));
     }
 
+    @CacheEvict(value = {"motos", "motoPormodelo", "motoPorZonacodigo", "motoPorId"}, allEntries = true)
     public Moto salvar(MotoDTO dto) {
         Zona zona = zonaRepository.findById(dto.zonaId())
                 .orElseThrow(() -> new ResourceNotFoundException("Zona não encontrada"));
@@ -50,6 +56,7 @@ public class MotoService {
         return motoRepository.save(moto);
     }
 
+    @CacheEvict(value = {"motos", "motoPormodelo", "motoPorZonacodigo", "motoPorId"}, allEntries = true)
     public Moto atualizar(Long id, MotoDTO dto) {
         Moto moto = buscarPorId(id);
         Zona zona = zonaRepository.findById(dto.zonaId())
@@ -63,6 +70,7 @@ public class MotoService {
         return motoRepository.save(moto);
     }
 
+    @CacheEvict(value = {"motos", "motoPormodelo", "motoPorZonacodigo", "motoPorId"}, allEntries = true)
     public void deletar(Long id) {
         if (!motoRepository.existsById(id)) {
             throw new ResourceNotFoundException("Moto não encontrada para exclusão");
