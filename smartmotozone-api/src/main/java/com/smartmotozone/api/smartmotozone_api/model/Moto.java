@@ -1,29 +1,32 @@
-// Moto.java
 package com.smartmotozone.api.smartmotozone_api.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class Moto {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "O modelo da moto é obrigatório")
     private String modelo;
 
-    @NotBlank
+    @NotBlank(message = "A placa da moto é obrigatória")
     private String placa;
 
-    @NotBlank
+    @NotBlank(message = "O status da moto é obrigatório")
     private String status;
 
-    @ManyToOne
-    @JoinColumn(name = "zona_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "zona_id", nullable = false)
+    @NotNull(message = "A zona da moto é obrigatória")
     private Zona zona;
 }

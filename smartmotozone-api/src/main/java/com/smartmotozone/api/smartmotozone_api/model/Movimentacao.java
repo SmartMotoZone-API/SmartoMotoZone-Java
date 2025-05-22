@@ -1,4 +1,3 @@
-// Movimentacao.java
 package com.smartmotozone.api.smartmotozone_api.model;
 
 import jakarta.persistence.*;
@@ -11,6 +10,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Movimentacao {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,6 +23,8 @@ public class Movimentacao {
 
     @ManyToOne
     private Zona zonaDestino;
+
+    private String descricao;
 
     private LocalDateTime dataHora;
 }
