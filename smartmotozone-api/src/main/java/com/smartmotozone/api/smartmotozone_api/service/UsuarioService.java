@@ -28,7 +28,7 @@ public class UsuarioService {
     if (usuarioRepository.findByLogin(dto.login()).isPresent()) {
         throw new BusinessException("Login já está em uso");
     }
-    Usuario usuario = new Usuario(null, dto.nome(), dto.perfil(), dto.login(), dto.senha());
+    Usuario usuario = new Usuario(null, dto.nome(), dto.perfil(), dto.login(), dto.senha(), dto.email());
     return usuarioRepository.save(usuario);
 }
 
@@ -43,6 +43,7 @@ public class UsuarioService {
         usuario.setPerfil(dto.perfil());
         usuario.setLogin(dto.login());
         usuario.setSenha(dto.senha());
+        usuario.setEmail(dto.email());;
         return usuarioRepository.save(usuario);
     }
 
@@ -55,4 +56,4 @@ public class UsuarioService {
             .orElseThrow(() -> new ResourceNotFoundException("Usuário com login '" + login + "' não encontrado"));
 }
 
-}
+    }

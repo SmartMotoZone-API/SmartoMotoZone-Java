@@ -10,9 +10,13 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Usuario {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank
+    private String login;
 
     @NotBlank
     private String nome;
@@ -21,8 +25,8 @@ public class Usuario {
     private String perfil;
 
     @NotBlank
-    private String login;
+    private String senha;
 
     @NotBlank
-    private String senha;
+    private String email;
 }
