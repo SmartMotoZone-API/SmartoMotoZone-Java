@@ -265,6 +265,8 @@ cd smartmotozone
 | Nome Completo      | RM     | GitHub                           |
 | ------------------ | ------ | -------------------------------- |
 | \[Kaio Cumpian Silva] | \[99816] | [https://github.com/KaioCumpian](#) |
+| \[Lucas Felix Vassiliades] | \[97677] | |
+| \[Gabriel Yuji Suzuki] | \[556588] | |
 
 ---
 
