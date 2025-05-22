@@ -1,7 +1,6 @@
 package com.smartmotozone.api.smartmotozone_api.service;
 
 import com.smartmotozone.api.smartmotozone_api.dto.MovimentacaoDTO;
-import com.smartmotozone.api.smartmotozone_api.dto.ZonaDTO;
 import com.smartmotozone.api.smartmotozone_api.model.Moto;
 import com.smartmotozone.api.smartmotozone_api.model.Movimentacao;
 import com.smartmotozone.api.smartmotozone_api.model.Zona;
