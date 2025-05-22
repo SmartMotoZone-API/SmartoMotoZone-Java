@@ -15,13 +15,21 @@ Facilitar o monitoramento e organização de motos em ambientes logísticos, per
 ## 🧩 Funcionalidades
 
 ✅ CRUD completo de motos, zonas, usuários, funcionários e movimentações
+
 ✅ Relacionamento entre entidades (`Moto` pertence a uma `Zona`)
+
 ✅ Paginação e ordenação nas listagens
+
 ✅ Filtros específicos: motos por modelo ou zona, zonas por descrição, usuários por login
+
 ✅ Validações robustas com Bean Validation
+
 ✅ Cache para otimizar consultas frequentes
+
 ✅ DTOs para comunicação segura e eficiente
+
 ✅ Tratamento global de exceções com mensagens claras
+
 ✅ Integração com Swagger para documentação interativa
 
 ---
