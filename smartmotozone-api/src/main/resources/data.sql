@@ -17,10 +17,10 @@ VALUES ('admin@smartmoto.com', 'admin', 'Administrador', 'ADMIN', '123456');
 
 -- MOVIMENTAÇÕES
 INSERT INTO MOVIMENTACAO (data_hora, moto_id, zona_destino_id, zona_origem_id, descricao)
-VALUES (CURRENT_TIMESTAMP(), 1, 2, 1, 'Transferência para manutenção');
+VALUES (CURRENT_TIMESTAMP(), 1, 2, 1, 'Transferencia para manutencao');
 
 INSERT INTO MOVIMENTACAO (data_hora, moto_id, zona_destino_id, zona_origem_id, descricao)
-VALUES (CURRENT_TIMESTAMP(), 2, 3, 2, 'Recolocação operacional');
+VALUES (CURRENT_TIMESTAMP(), 2, 3, 2, 'Recolocacao operacional');
 
 INSERT INTO MOVIMENTACAO (data_hora, moto_id, zona_destino_id, zona_origem_id, descricao)
-VALUES (CURRENT_TIMESTAMP(), 3, 1, 3, 'Retorno pós manutenção');
+VALUES (CURRENT_TIMESTAMP(), 3, 1, 3, 'Retorno pos manutencao');
