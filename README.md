@@ -1,5 +1,3 @@
-Claro! Aqui está o README completo, estruturado, bonito e com a seção dos recursos Usuário, Funcionário e Movimentação detalhada, pronto para copiar e colar no GitHub.
-
 ---
 
 # 🛵 SmartMotoZone API
@@ -38,7 +36,6 @@ Facilitar o monitoramento e organização de motos em ambientes logísticos, per
 * Spring Cache (cache distribuído local)
 * Bean Validation (Jakarta)
 * Lombok
-* Swagger/OpenAPI (springdoc-openapi-ui)
 
 ---
 
@@ -202,7 +199,6 @@ cd smartmotozone
 
 3. **Acesse os recursos no navegador:**
 
-* Swagger UI: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
 * H2 Console: [http://localhost:8080/h2-console](http://localhost:8080/h2-console)
 
 ---
@@ -268,7 +264,7 @@ cd smartmotozone
 
 | Nome Completo      | RM     | GitHub                           |
 | ------------------ | ------ | -------------------------------- |
-| \[Kaio Cumpian Silva] | \[99816] | [https://github.com/usuario1](#) |
+| \[Kaio Cumpian Silva] | \[99816] | [https://github.com/KaioCumpian](#) |
 
 ---
 
