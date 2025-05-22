@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Data
+@Table(name = "MOVIMENTACAO")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Movimentacao {

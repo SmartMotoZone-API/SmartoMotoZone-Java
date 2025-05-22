@@ -7,6 +7,7 @@ import lombok.*;
 
 @Entity
 @Data
+@Table(name = "FUNCIONARIO")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Funcionario {
