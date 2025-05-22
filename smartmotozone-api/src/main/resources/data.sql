@@ -1,29 +1,26 @@
 -- ZONAS
-INSERT INTO ZONA (CODIGO, DESCRICAO) VALUES ('Z01', 'Zona Central');
-INSERT INTO ZONA (CODIGO, DESCRICAO) VALUES ('Z02', 'Zona Norte');
-INSERT INTO ZONA (CODIGO, DESCRICAO) VALUES ('Z03', 'Zona Sul');
+INSERT INTO ZONA (codigo, descricao) VALUES ('Z01', 'Zona Central');
+INSERT INTO ZONA (codigo, descricao) VALUES ('Z02', 'Zona Norte');
+INSERT INTO ZONA (codigo, descricao) VALUES ('Z03', 'Zona Sul');
 
 -- MOTOS
-INSERT INTO MOTO (ZONA_ID, MODELO, PLACA, STATUS) VALUES (1, 'Honda CG 160', 'ABC1234', 'DISPONIVEL');
-INSERT INTO MOTO (ZONA_ID, MODELO, PLACA, STATUS) VALUES (2, 'Yamaha Fazer 250', 'XYZ5678', 'EM_USO');
-INSERT INTO MOTO (ZONA_ID, MODELO, PLACA, STATUS) VALUES (3, 'Suzuki Intruder', 'DEF9876', 'MANUTENCAO');
+INSERT INTO MOTO (zona_id, modelo, placa, status) VALUES (1, 'Honda CG 160', 'ABC1234', 'DISPONIVEL');
+INSERT INTO MOTO (zona_id, modelo, placa, status) VALUES (2, 'Yamaha Fazer 250', 'XYZ5678', 'EM_USO');
+INSERT INTO MOTO (zona_id, modelo, placa, status) VALUES (3, 'Suzuki Intruder', 'DEF9876', 'MANUTENCAO');
 
--- FUNCIONÁRIO
-INSERT INTO FUNCIONARIO (CARGO, NOME) VALUES ('Gestor', 'Carlos Silva');
+-- FUNCIONÁRIOS
+INSERT INTO FUNCIONARIO (cargo, nome) VALUES ('Gestor', 'Carlos Silva');
 
--- USUÁRIO
-INSERT INTO USUARIO (EMAIL, LOGIN, NOME, PERFIL, SENHA)
+-- USUÁRIOS
+INSERT INTO USUARIO (email, login, nome, perfil, senha)
 VALUES ('admin@smartmoto.com', 'admin', 'Administrador', 'ADMIN', '123456');
 
--- MOVIMENTAÇÃO
--- Moto 1 vai da Zona 1 para a Zona 2
-INSERT INTO MOVIMENTACAO (DATA_HORA, MOTO_ID, ZONA_DESTINO_ID, ZONA_ORIGEM_ID, DESCRICAO)
+-- MOVIMENTAÇÕES
+INSERT INTO MOVIMENTACAO (data_hora, moto_id, zona_destino_id, zona_origem_id, descricao)
 VALUES (CURRENT_TIMESTAMP(), 1, 2, 1, 'Transferência para manutenção');
 
--- Moto 2 vai da Zona 2 para a Zona 3
-INSERT INTO MOVIMENTACAO (DATA_HORA, MOTO_ID, ZONA_DESTINO_ID, ZONA_ORIGEM_ID, DESCRICAO)
+INSERT INTO MOVIMENTACAO (data_hora, moto_id, zona_destino_id, zona_origem_id, descricao)
 VALUES (CURRENT_TIMESTAMP(), 2, 3, 2, 'Recolocação operacional');
 
--- Moto 3 vai da Zona 3 para a Zona 1
-INSERT INTO MOVIMENTACAO (DATA_HORA, MOTO_ID, ZONA_DESTINO_ID, ZONA_ORIGEM_ID, DESCRICAO)
+INSERT INTO MOVIMENTACAO (data_hora, moto_id, zona_destino_id, zona_origem_id, descricao)
 VALUES (CURRENT_TIMESTAMP(), 3, 1, 3, 'Retorno pós manutenção');
