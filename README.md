@@ -51,6 +51,7 @@ smartmotozone/
 ├── SmartMotoZoneApiApplication.java
 └── resources/
     └── application.properties
+    └── data.sql
 `
 
 ---
@@ -67,12 +68,14 @@ smartmotozone/
 
 ### 🏍 Moto
 
-| Campo  | Tipo   | Descrição                         |
-| ------ | ------ | --------------------------------- |
-| id     | Long   | ID da moto                        |
-| modelo | String | Modelo da moto                    |
-| status | String | Status da moto (ex: Ativa)        |
-| zona   | Zona   | Zona à qual a moto está vinculada |
+| Campo  | Tipo   | Descrição                                           |
+| ------ | ------ | --------------------------------------------------- |
+| id     | Long   | ID da moto                                          |
+| modelo | String | Modelo da moto (**obrigatório**)                    |
+| placa  | String | Placa da moto (**obrigatória**)                     |
+| status | String | Status da moto (ex: Ativa) (**obrigatório**)        |
+| zona   | Zona   | Zona à qual a moto está vinculada (**obrigatória**) |
+
 
 ---
 
