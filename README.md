@@ -30,7 +30,7 @@ Facilitar o monitoramento e organização de motos em ambientes logísticos, per
 
 ✅ Tratamento global de exceções com mensagens claras
 
-✅ Integração com Swagger para documentação interativa
+
 
 ---
 
