@@ -3,9 +3,6 @@ package com.smartmotozone.api.smartmotozone_api.dto;
 import java.time.LocalDateTime;
 import jakarta.validation.constraints.NotNull;
 
-/**
- * DTO para transferência de dados da entidade Movimentação.
- */
 public record MovimentacaoDTO(
     Long id,
 

@@ -3,9 +3,6 @@ package com.smartmotozone.api.smartmotozone_api.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-/**
- * DTO para transferência de dados da entidade Moto.
- */
 public record MotoDTO(
 
     Long id,

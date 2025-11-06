@@ -2,9 +2,7 @@ package com.smartmotozone.api.smartmotozone_api.dto;
 
 import jakarta.validation.constraints.NotBlank;
 
-/**
- * DTO para transferência de dados da entidade Zona.
- */
+
 public record ZonaDTO(
 
     Long id,

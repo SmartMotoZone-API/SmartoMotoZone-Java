@@ -29,7 +29,7 @@ public class ZonaService {
 
     @CacheEvict(value = {"zonas", "zonasPorId"}, allEntries = true)
     public Zona salvar(ZonaDTO dto) {
-        Zona zona = new Zona(null, dto.codigo(), dto.descricao(), null);
+        Zona zona = new Zona();
         return zonaRepository.save(zona);
     }
 

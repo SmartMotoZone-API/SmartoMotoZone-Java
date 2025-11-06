@@ -52,7 +52,7 @@ public class MotoService {
         Zona zona = zonaRepository.findById(dto.zonaId())
                 .orElseThrow(() -> new ResourceNotFoundException("Zona não encontrada"));
 
-        Moto moto = new Moto(null, dto.modelo(), dto.placa(), dto.status(), zona);
+        Moto moto = new Moto();
         return motoRepository.save(moto);
     }
 

@@ -16,6 +16,10 @@ public class FuncionarioController {
 
     private final FuncionarioService funcionarioService;
 
+    public FuncionarioController(FuncionarioService funcionarioService) {
+        this.funcionarioService = funcionarioService;
+    }
+
     @PostMapping
     public Funcionario criar(@RequestBody @Valid FuncionarioDTO dto) {
         return funcionarioService.salvar(dto);
