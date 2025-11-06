@@ -51,8 +51,7 @@ public class MotoService {
     public Moto salvar(MotoDTO dto) {
         Zona zona = zonaRepository.findById(dto.zonaId())
                 .orElseThrow(() -> new ResourceNotFoundException("Zona não encontrada"));
-
-        Moto moto = new Moto();
+        Moto moto = new Moto(null, dto.modelo(), dto.placa(), dto.status(), zona);
         return motoRepository.save(moto);
     }
 

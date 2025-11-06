@@ -38,7 +38,7 @@ public class UsuarioService {
         String senhaHasheada = passwordEncoder.encode(dto.senha());
         UserRole perfil = UserRole.valueOf(dto.perfil().toUpperCase());
 
-        Usuario usuario = new Usuario();
+        Usuario usuario = new Usuario(null, dto.login(), dto.nome(), perfil, senhaHasheada, dto.email());
         return usuarioRepository.save(usuario);
     }
 

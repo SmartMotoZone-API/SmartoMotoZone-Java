@@ -18,9 +18,6 @@ public class FuncionarioService {
 
     private final FuncionarioRepository funcionarioRepository;
 
-    public FuncionarioService(FuncionarioRepository funcionarioRepository) {
-        this.funcionarioRepository = funcionarioRepository;
-    }
 
     @CacheEvict(value = {"funcionarios", "funcionarioPorId"}, allEntries = true)
     public Funcionario salvar(FuncionarioDTO dto) {

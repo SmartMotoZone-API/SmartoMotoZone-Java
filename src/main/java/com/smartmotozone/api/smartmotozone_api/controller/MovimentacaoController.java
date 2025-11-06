@@ -16,9 +16,6 @@ public class MovimentacaoController {
 
     private final MovimentacaoService movimentacaoService;
 
-    public MovimentacaoController(MovimentacaoService movimentacaoService) {
-        this.movimentacaoService = movimentacaoService;
-    }
 
     @PostMapping
     public Movimentacao criar(@RequestBody @Valid MovimentacaoDTO dto) {

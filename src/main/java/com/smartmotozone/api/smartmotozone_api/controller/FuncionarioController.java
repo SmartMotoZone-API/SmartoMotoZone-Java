@@ -15,10 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class FuncionarioController {
 
     private final FuncionarioService funcionarioService;
-
-    public FuncionarioController(FuncionarioService funcionarioService) {
-        this.funcionarioService = funcionarioService;
-    }
+    
 
     @PostMapping
     public Funcionario criar(@RequestBody @Valid FuncionarioDTO dto) {

@@ -5,14 +5,14 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.4.5</version>
+		<version>3.3.0</version>
 		<relativePath/>
 	</parent>
 	<groupId>com.smartmotozone.api</groupId>
 	<artifactId>SmartoMotoZone-Java</artifactId>
 	<version>1.0</version>
 	<name>smartmotozone-api</name>
-	<description>Sistema completo em Java</description>
+	<description>API completa em Java</description>
 	<url/>
 	<licenses>
 		<license/>
