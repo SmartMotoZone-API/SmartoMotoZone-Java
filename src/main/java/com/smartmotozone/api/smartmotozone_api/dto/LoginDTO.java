@@ -1,4 +1,4 @@
-package com.smartmotozone.api.smartmotozone_api.dto.security;
+package com.smartmotozone.api.smartmotozone_api.dto;
 
 import jakarta.validation.constraints.NotBlank;
 

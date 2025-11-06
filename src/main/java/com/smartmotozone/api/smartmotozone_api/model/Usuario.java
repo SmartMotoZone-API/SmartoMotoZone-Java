@@ -1,5 +1,6 @@
 package com.smartmotozone.api.smartmotozone_api.model;
 
+import com.smartmotozone.api.smartmotozone_api.enums.UserRole;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
@@ -27,8 +28,8 @@ public class Usuario implements UserDetails {
     @NotBlank
     private String nome;
 
-    @NotBlank
-    private String perfil;
+    @Enumerated(EnumType.STRING)
+    private UserRole perfil;
 
     @NotBlank
     private String senha;
@@ -39,7 +40,7 @@ public class Usuario implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_" + this.perfil));
+        return List.of(new SimpleGrantedAuthority("ROLE_" + this.perfil.name()));
     }
 
     @Override

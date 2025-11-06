@@ -1,4 +1,4 @@
-package com.smartmotozone.api.smartmotozone_api.service.security;
+package com.smartmotozone.api.smartmotozone_api.service;
 
 import com.smartmotozone.api.smartmotozone_api.model.Usuario;
 import io.jsonwebtoken.Jwts;

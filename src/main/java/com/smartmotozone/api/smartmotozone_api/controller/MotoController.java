@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.http.HttpStatus.*;
@@ -23,16 +24,19 @@ public class MotoController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('ADMIN', 'USUARIO')")
     public Page<Moto> listar(@PageableDefault Pageable pageable) {
         return motoService.listarTodos(pageable);
     }
 
     @GetMapping("/buscar")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USUARIO')")
     public Page<Moto> buscarPorModelo(@RequestParam String modelo, @PageableDefault Pageable pageable) {
         return motoService.buscarPorModelo(modelo, pageable);
     }
 
     @GetMapping("/zona/{codigoZona}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USUARIO')")
     public ResponseEntity<?> buscarPorZona(@PathVariable String codigoZona) {
         var motos = motoService.buscarPorZonaCodigo(codigoZona);
         if (motos.isEmpty()) {
@@ -42,24 +46,28 @@ public class MotoController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Moto> criar(@RequestBody @Valid MotoDTO dto) {
         Moto moto = motoService.salvar(dto);
         return ResponseEntity.status(CREATED).body(moto);
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USUARIO')")
     public ResponseEntity<Moto> buscarPorId(@PathVariable Long id) {
         Moto moto = motoService.buscarPorId(id);
         return ResponseEntity.ok(moto);
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Moto> atualizar(@PathVariable Long id, @RequestBody @Valid MotoDTO dto) {
         Moto motoAtualizada = motoService.atualizar(id, dto);
         return ResponseEntity.ok(motoAtualizada);
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
         motoService.deletar(id);
         return ResponseEntity.noContent().build();

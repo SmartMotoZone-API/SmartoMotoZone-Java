@@ -12,8 +12,6 @@ INSERT INTO MOTO (zona_id, modelo, placa, status) VALUES (3, 'Suzuki Intruder', 
 INSERT INTO FUNCIONARIO (cargo, nome) VALUES ('Gestor', 'Carlos Silva');
 
 -- USUÁRIOS
--- IMPORTANTE: A senha precisa ser "hasheada" para o Spring Security
--- A senha '123456' hasheada (BCrypt) é: $2a$10$T/DL.1qMssS6yv8m/c.S.Oq0/D.E.E.q2sJz.f.m9g.3.1.Zp.k3e
 INSERT INTO USUARIO (email, login, nome, perfil, senha)
 VALUES ('admin@smartmoto.com', 'admin', 'Administrador', 'ADMIN', '$2a$10$T/DL.1qMssS6yv8m/c.S.Oq0/D.E.E.q2sJz.f.m9g.3.1.Zp.k3e');
 

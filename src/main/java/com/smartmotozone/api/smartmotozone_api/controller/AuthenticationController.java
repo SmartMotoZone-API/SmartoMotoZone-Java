@@ -1,9 +1,9 @@
-package com.smartmotozone.api.smartmotozone_api.controller.security;
+package com.smartmotozone.api.smartmotozone_api.controller;
 
-import com.smartmotozone.api.smartmotozone_api.dto.security.LoginDTO;
-import com.smartmotozone.api.smartmotozone_api.dto.security.TokenDTO;
+import com.smartmotozone.api.smartmotozone_api.dto.LoginDTO;
+import com.smartmotozone.api.smartmotozone_api.dto.TokenDTO;
 import com.smartmotozone.api.smartmotozone_api.model.Usuario;
-import com.smartmotozone.api.smartmotozone_api.service.security.TokenService;
+import com.smartmotozone.api.smartmotozone_api.service.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

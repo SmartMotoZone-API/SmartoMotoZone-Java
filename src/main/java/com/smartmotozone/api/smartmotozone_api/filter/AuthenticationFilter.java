@@ -1,7 +1,7 @@
 package com.smartmotozone.api.smartmotozone_api.filter;
 
-import com.smartmotozone.api.smartmotozone_api.service.security.AuthenticationService;
-import com.smartmotozone.api.smartmotozone_api.service.security.TokenService;
+import com.smartmotozone.api.smartmotozone_api.service.AuthenticationService;
+import com.smartmotozone.api.smartmotozone_api.service.TokenService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

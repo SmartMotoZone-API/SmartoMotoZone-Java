@@ -1,6 +1,7 @@
 package com.smartmotozone.api.smartmotozone_api.service;
 
 import com.smartmotozone.api.smartmotozone_api.dto.UsuarioDTO;
+import com.smartmotozone.api.smartmotozone_api.enums.UserRole;
 import com.smartmotozone.api.smartmotozone_api.exception.BusinessException;
 import com.smartmotozone.api.smartmotozone_api.exception.ResourceNotFoundException;
 import com.smartmotozone.api.smartmotozone_api.model.Usuario;
@@ -35,7 +36,9 @@ public class UsuarioService {
         }
 
         String senhaHasheada = passwordEncoder.encode(dto.senha());
-        Usuario usuario = new Usuario(null, dto.login(), dto.nome(), dto.perfil(), senhaHasheada, dto.email(), null);
+        UserRole perfil = UserRole.valueOf(dto.perfil().toUpperCase());
+
+        Usuario usuario = new Usuario(null, dto.login(), dto.nome(), perfil, senhaHasheada, dto.email());
         return usuarioRepository.save(usuario);
     }
 
@@ -50,9 +53,10 @@ public class UsuarioService {
         Usuario usuario = buscarPorId(id);
 
         String senhaHasheada = passwordEncoder.encode(dto.senha());
+        UserRole perfil = UserRole.valueOf(dto.perfil().toUpperCase());
 
         usuario.setNome(dto.nome());
-        usuario.setPerfil(dto.perfil());
+        usuario.setPerfil(perfil);
         usuario.setLogin(dto.login());
         usuario.setSenha(senhaHasheada);
         usuario.setEmail(dto.email());
