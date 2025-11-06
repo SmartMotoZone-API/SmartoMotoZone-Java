@@ -1,6 +1,5 @@
 package com.smartmotozone.api.smartmotozone_api.model;
 
-import com.smartmotozone.api.smartmotozone_api.enums.UserRole;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
@@ -17,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Usuario implements UserDetails {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,8 +30,6 @@ public class Usuario implements UserDetails {
     @NotBlank
     private String perfil;
 
-    private UserRole role;
-
     @NotBlank
     private String senha;
 
@@ -42,7 +39,7 @@ public class Usuario implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_" + this.role));
+        return List.of(new SimpleGrantedAuthority("ROLE_" + this.perfil));
     }
 
     @Override
@@ -55,7 +52,6 @@ public class Usuario implements UserDetails {
         return this.login;
     }
 
-    // Para simplificar, vamos deixar tudo como 'true'
     @Override
     public boolean isAccountNonExpired() {
         return true;

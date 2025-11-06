@@ -5,20 +5,22 @@ import com.smartmotozone.api.smartmotozone_api.exception.BusinessException;
 import com.smartmotozone.api.smartmotozone_api.exception.ResourceNotFoundException;
 import com.smartmotozone.api.smartmotozone_api.model.Usuario;
 import com.smartmotozone.api.smartmotozone_api.repository.UsuarioRepository;
-
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UsuarioService(UsuarioRepository usuarioRepository) {
+    public UsuarioService(UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder) {
         this.usuarioRepository = usuarioRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Cacheable(value = "usuarios", key = "#pageable.pageNumber + '-' + #pageable.pageSize + '-' + #pageable.sort")
@@ -31,7 +33,9 @@ public class UsuarioService {
         if (usuarioRepository.findByLogin(dto.login()).isPresent()) {
             throw new BusinessException("Login já está em uso");
         }
-        Usuario usuario = new Usuario(null, dto.nome(), dto.perfil(), dto.login(), dto.senha(), dto.email());
+
+        String senhaHasheada = passwordEncoder.encode(dto.senha());
+        Usuario usuario = new Usuario(null, dto.login(), dto.nome(), dto.perfil(), senhaHasheada, dto.email(), null);
         return usuarioRepository.save(usuario);
     }
 
@@ -44,10 +48,13 @@ public class UsuarioService {
     @CacheEvict(value = {"usuarios", "usuariosPorId", "usuarioPorLogin"}, allEntries = true)
     public Usuario atualizar(Long id, UsuarioDTO dto) {
         Usuario usuario = buscarPorId(id);
+
+        String senhaHasheada = passwordEncoder.encode(dto.senha());
+
         usuario.setNome(dto.nome());
         usuario.setPerfil(dto.perfil());
         usuario.setLogin(dto.login());
-        usuario.setSenha(dto.senha());
+        usuario.setSenha(senhaHasheada);
         usuario.setEmail(dto.email());
         return usuarioRepository.save(usuario);
     }
