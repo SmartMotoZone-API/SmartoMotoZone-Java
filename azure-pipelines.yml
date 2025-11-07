@@ -1,0 +1,35 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+stages:
+- stage: CI_Build_and_Test
+  displayName: 'CI - Build, Test and Publish Artifact'
+  jobs:
+  - job: Build
+    displayName: 'Build, Test and Publish'
+    steps:
+    
+    - task: JavaToolInstaller@0
+      inputs:
+        versionSpec: '21'
+        jdkArchitectureOption: 'x64'
+        jdkSourceOption: 'PreInstalled'
+
+    - task: Maven@3
+      displayName: 'Build and Test (mvn package)'
+      inputs:
+        mavenPomFile: 'pom.xml'
+        goals: 'package' 
+        options: '-DskipTests=false'
+        publishJUnitTestResults: true
+        testResultsFiles: '**/surefire-reports/TEST-*.xml' 
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact (.jar)'
+      inputs:
+        PathtoPublish: '$(Build.SourcesDirectory)/target/SmartoMotoZone-Java-1.0.jar'
+        ArtifactName: 'jar'
+        publishLocation: 'Container'
