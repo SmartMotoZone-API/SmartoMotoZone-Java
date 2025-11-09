@@ -1,0 +1,104 @@
+# 1. GATILHO: Dispara a pipeline quando houver um push na branch 'main'
+trigger:
+- main
+
+# 2. VARIÁVEIS: Nomes dos seus recursos do Azure
+variables:
+  # --- Nomes dos seus recursos ---
+  ACR_NAME: 'acrsmartmotozonefiap'
+  APP_SERVICE_NAME: 'app-smartmotozone-fiap'
+  
+  # --- Nomes para a imagem Docker ---
+  IMAGE_NAME: 'smartmotozone-java'
+  IMAGE_TAG: '$(Build.BuildId)' # Cria uma tag única para cada build
+
+  # --- Caminho para o .jar (do seu pom.xml) ---
+  JAR_PATH: 'target/SmartoMotoZone-Java-1.0.jar'
+
+# 3. AGENTE: O tipo de "computador" que vai rodar a pipeline
+pool:
+  vmImage: 'ubuntu-latest'
+
+# ==================================================================
+# 4. ESTÁGIOS: A pipeline é dividida em estágios
+# ==================================================================
+stages:
+
+# ==================================================================
+# ESTÁGIO 1: CI (Build, Teste, e Criação da Imagem Docker)
+# ==================================================================
+- stage: CI_Build_Test_and_Push_Image
+  displayName: 'CI - Build, Test e Push da Imagem'
+  jobs:
+  - job: BuildAndPush
+    displayName: 'Job de Build, Test e Push'
+    steps:
+
+    # 4.1. Configura o Java (seu pom.xml usa 21)
+    - task: JavaToolInstaller@0
+      displayName: 'Instalar Java 21'
+      inputs:
+        versionSpec: '21'
+        jdkArchitectureOption: 'x64'
+        jdkSourceOption: 'PreInstalled'
+
+    # 4.2. Roda o Maven para compilar e testar
+    # CUMPRE REQUISITO: 7.a (build) e 7.V (testes)
+    - task: Maven@3
+      displayName: 'Maven - Build e Teste (mvn package)'
+      inputs:
+        mavenPomFile: 'pom.xml'
+        goals: 'package' # 'package' já inclui 'test'
+        options: '-DskipTests=false' # Garante que os testes rodem
+        publishJUnitTestResults: true
+        testResultsFiles: '**/surefire-reports/TEST-*.xml'
+
+    # 4.3. Constrói a Imagem Docker
+    # CUMPRE REQUISITO: 7.VII (Usa imagem Docker)
+    - task: Docker@2
+      displayName: 'Build da Imagem Docker'
+      inputs:
+        command: 'build'
+        Dockerfile: 'Dockerfile'
+        repository: '$(IMAGE_NAME)'
+        tags: '$(IMAGE_TAG)'
+        arguments: '--build-arg JAR_FILE=$(JAR_PATH)' # Envia o caminho do .jar para o Dockerfile
+
+    # 4.4. Faz o "Push" da imagem para sua "garagem" (ACR)
+    - task: Docker@2
+      displayName: 'Push da Imagem para o ACR'
+      inputs:
+        command: 'push'
+        repository: '$(IMAGE_NAME)'
+        tags: '$(IMAGE_TAG)'
+        # 'ACR_Connection' é o nome da conexão que vamos criar na Ação 2
+        containerRegistry: 'ACR_Connection' 
+
+# ==================================================================
+# ESTÁGIO 2: CD (Deploy da Imagem no App Service)
+# ==================================================================
+- stage: CD_Deploy_to_App_Service
+  displayName: 'CD - Deploy no App Service'
+  dependsOn: CI_Build_Test_and_Push_Image # Só roda se o Estágio 1 (CI) funcionar
+  condition: succeeded()
+  jobs:
+  - job: Deploy
+    displayName: 'Job de Deploy'
+    steps:
+    
+    # 4.5. Faz o Deploy no Azure Web App
+    # CUMPRE REQUISITO: 7.b (deploy) e 7.VI (Azure Web App)
+    - task: AzureWebAppContainer@1
+      displayName: 'Deploy: app-smartmotozone-fiap'
+      inputs:
+        # 'Azure_Subscription_Connection' é o nome da conexão que vamos criar na Ação 2
+        azureSubscription: 'Azure_Subscription_Connection'
+        appName: '$(APP_SERVICE_NAME)'
+        imageName: '$(ACR_NAME).azurecr.io/$(IMAGE_NAME):$(IMAGE_TAG)'
+
+        # 4.6. Injeta as senhas do Banco de Dados como Variáveis de Ambiente
+        # CUMPRE REQUISITO: 7.III (Variáveis protegidas)
+        appSettings: |
+          -DB_URL $(DB_URL)
+          -DB_USERNAME $(DB_USERNAME)
+          -DB_PASSWORD $(DB_PASSWORD)
