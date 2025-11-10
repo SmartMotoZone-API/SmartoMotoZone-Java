@@ -49,7 +49,7 @@ public class MovimentacaoService {
         return movimentacaoRepository.save(movimentacao);
     }
 
-    @Cacheable(value = "movimentacao", key = "#pageable.pageNumber + '-' + #pageable.pageSize + '-' + #pageable.sort")
+    @Cacheable(value = "movimentacao", key = "#pageable.isPaged() ? #pageable.pageNumber + '-' + #pageable.pageSize + '-' + #pageable.sort : 'unpaged'")
     public Page<Movimentacao> listarTodas(Pageable pageable) {
         return movimentacaoRepository.findAll(pageable);
     }

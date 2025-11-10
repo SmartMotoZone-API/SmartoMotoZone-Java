@@ -26,7 +26,7 @@ public class MotoService {
         this.zonaRepository = zonaRepository;
     }
 
-    @Cacheable(value = "motos", key = "#pageable.pageNumber + '-' + #pageable.pageSize + '-' + #pageable.sort")
+    @Cacheable(value = "motos", key = "#pageable.isPaged() ? #pageable.pageNumber + '-' + #pageable.pageSize + '-' + #pageable.sort : 'unpaged'")
     public Page<Moto> listarTodos(Pageable pageable) {
         return motoRepository.findAll(pageable);
     }

@@ -21,25 +21,25 @@ public class FuncionarioService {
 
     @CacheEvict(value = {"funcionarios", "funcionarioPorId"}, allEntries = true)
     public Funcionario salvar(FuncionarioDTO dto) {
-    Funcionario funcionario = new Funcionario();
-    funcionario.setNome(dto.nome());
-    funcionario.setCargo(dto.cargo());
+        Funcionario funcionario = new Funcionario();
+        funcionario.setNome(dto.nome());
+        funcionario.setCargo(dto.cargo());
         return funcionarioRepository.save(funcionario);
-}
+    }
 
-    @Cacheable(value = "funcionarios", key = "#pageable.pageNumber + '-' + #pageable.pageSize + '-' + #pageable.sort")
+    @Cacheable(value = "funcionarios", key = "#pageable.isPaged() ? #pageable.pageNumber + '-' + #pageable.pageSize + '-' + #pageable.sort : 'unpaged'")
     public Page<Funcionario> listarTodos(Pageable pageable) {
         return funcionarioRepository.findAll(pageable);
-}
+    }
 
 
     @Cacheable(value = "funcionarioPorId", key = "#id")
     public Funcionario buscarPorId(Long id) {
-    return funcionarioRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Funcionário não encontrado"));
-}
-    
-    
+        return funcionarioRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Funcionário não encontrado"));
+    }
+
+
     @CacheEvict(value = {"funcionarios", "funcionarioPorId"}, allEntries = true)
     public Funcionario atualizar(Long id, FuncionarioDTO dto) {
         Funcionario funcionario = buscarPorId(id);
@@ -47,8 +47,8 @@ public class FuncionarioService {
         funcionario.setCargo(dto.cargo());
         return funcionarioRepository.save(funcionario);
     }
-    
-    
+
+
     @CacheEvict(value = {"funcionarios", "funcionarioPorId"}, allEntries = true)
     public void deletar(Long id) {
         Funcionario funcionario = buscarPorId(id);
