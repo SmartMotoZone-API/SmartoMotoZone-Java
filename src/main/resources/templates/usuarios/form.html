@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" th:replace="~{_layout :: template(~{::title}, ~{::main})}">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{_layout :: template(titleText=${usuarioDTO.id == null ? 'Novo Usuário' : 'Editar Usuário'}, mainContent=~{::main})}">
 <head>
-    <title th:text="${usuarioDTO.id == null ? 'Novo Usuário' : 'Editar Usuário'}">Formulário de Usuário</title>
+    <title>Ignorado</title>
 </head>
 <body>
 <main>
@@ -34,14 +35,16 @@
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="senha" class="form-label">Senha</label>
-                    <input type="password" class="form-control" th:field="*{senha}" id="senha" th:placeholder="${usuarioDTO.id != null ? 'Deixe em branco para manter' : ''}" th:required="${usuarioDTO.id == null}">
+                    <input type="password" class="form-control" th:field="*{senha}" id="senha"
+                           th:placeholder="${usuarioDTO.id != null ? 'Deixe em branco para manter' : ''}"
+                           th:required="${usuarioDTO.id == null}">
                     <div class="text-danger" th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}"></div>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="perfil" class="form-label">Perfil</label>
-                        <select class="form-select" th:field="*{perfil}" id="perfil" required>
-                            <option th:each="p : ${perfis}" th:value="${p}" th:text="${p}"></option>
-                        </select>
+                    <select class="form-select" th:field="*{perfil}" id="perfil" required>
+                        <option th:each="p : ${perfis}" th:value="${p}" th:text="${p}"></option>
+                    </select>
                 </div>
             </div>
 

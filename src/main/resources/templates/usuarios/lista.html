@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" th:replace="~{_layout :: template(~{::title}, ~{::main})}">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/springsecurity6"
+      th:replace="~{_layout :: template(titleText='Usuários', mainContent=~{::main})}">
 <head>
-    <title>Lista de Usuários</title>
+    <title>Ignorado</title>
 </head>
 <body>
 <main>
@@ -11,7 +12,7 @@
 
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h2>Gerenciamento de Usuários</h2>
-            <a href="/web/usuarios/novo" class="btn btn-primary">Novo Usuário</a>
+            <a sec:authorize="hasRole('ADMIN')" href="/web/usuarios/novo" class="btn btn-primary">Novo Usuário</a>
         </div>
 
         <table class="table table-striped table-hover">
@@ -22,7 +23,7 @@
                 <th>Login</th>
                 <th>Email</th>
                 <th>Perfil</th>
-                <th>Ações</th>
+                <th sec:authorize="hasRole('ADMIN')">Ações</th>
             </tr>
             </thead>
             <tbody>
@@ -32,7 +33,7 @@
                 <td th:text="${user.login}">admin</td>
                 <td th:text="${user.email}">admin@email.com</td>
                 <td th:text="${user.perfil}">ADMIN</td>
-                <td>
+                <td sec:authorize="hasRole('ADMIN')">
                     <a th:href="@{/web/usuarios/editar/{id}(id=${user.id})}" class="btn btn-sm btn-warning">Editar</a>
                     <a th:href="@{/web/usuarios/deletar/{id}(id=${user.id})}" class="btn btn-sm btn-danger"
                        onclick="return confirm('Tem certeza que deseja excluir este usuário?');">Excluir</a>

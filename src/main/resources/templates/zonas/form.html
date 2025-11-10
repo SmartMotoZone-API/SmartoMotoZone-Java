@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" th:replace="~{_layout :: template(~{::title}, ~{::main})}">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{_layout :: template(titleText='Formulário de Zona', mainContent=~{::main})}">
 <head>
-    <title th:text="${zonaDTO.id == null ? 'Nova Zona' : 'Editar Zona'}">Formulário de Zona</title>
+    <title>Ignorado</title>
 </head>
 <body>
 <main>

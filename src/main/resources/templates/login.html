@@ -17,6 +17,9 @@
                         Usuário ou senha inválidos.
                     </div>
 
+                    <div th:if="${sucesso}" class="alert alert-success" th:text="${sucesso}">
+                    </div>
+
                     <form th:action="@{/web/login}" method="post">
                         <div class="mb-3">
                             <label for="username" class="form-label">Login</label>
@@ -26,8 +29,10 @@
                             <label for="password" class="form-label">Senha</label>
                             <input type="password" class="form-control" id="password" name="password" required>
                         </div>
-                        <div class="d-grid">
+
+                        <div class="d-grid gap-2">
                             <button type="submit" class="btn btn-primary">Entrar</button>
+                            <a th:href="@{/web/register}" class="btn btn-outline-secondary">Criar Conta</a>
                         </div>
                     </form>
                 </div>

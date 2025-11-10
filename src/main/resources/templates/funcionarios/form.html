@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" th:replace="~{_layout :: template(~{::title}, ~{::main})}">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{_layout :: template(titleText=${funcionarioDTO.id == null ? 'Novo Funcionário' : 'Editar Funcionário'}, mainContent=~{::main})}">
 <head>
-    <title th:text="${funcionarioDTO.id == null ? 'Novo Funcionário' : 'Editar Funcionário'}">Formulário de Funcionário</title>
+    <title>Ignorado</title>
 </head>
 <body>
 <main>
@@ -26,8 +27,7 @@
 
             <div class="d-flex justify-content-end gap-2">
                 <a href="/web/funcionarios" class="btn btn-secondary">Cancelar</a>
-                <button type
-                                ="submit" class="btn btn-primary">Salvar</button>
+                <button type="submit" class="btn btn-primary">Salvar</button>
             </div>
         </form>
     </div>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{_layout :: template(titleText='Ocorreu um Erro', mainContent=~{::main})}">
+<head>
+    <title>Ignorado</title>
+</head>
+<body>
+<main>
+    <div class="container mt-4">
+        <div class="p-5 mb-4 bg-light rounded-3 text-center">
+            <div class="container-fluid py-5">
+                <h1 class="display-5 fw-bold">Ops! Algo deu errado.</h1>
+
+                <p class="fs-4" th:text="${'Status: ' + status + ' (' + error + ')'}"></p>
+                <p th:text="${message}">A página que você está procurando pode não existir ou você não tem permissão.</p>
+
+                <a href="/web/home" class="btn btn-primary btn-lg">Voltar para a Home</a>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

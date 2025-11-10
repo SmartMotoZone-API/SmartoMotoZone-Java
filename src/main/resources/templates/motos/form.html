@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" th:replace="~{_layout :: template(~{::title}, ~{::main})}">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{_layout :: template(titleText=${motoDTO.id == null ? 'Nova Moto' : 'Editar Moto'}, mainContent=~{::main})}">
 <head>
     <title th:text="${motoDTO.id == null ? 'Nova Moto' : 'Editar Moto'}">Formulário de Moto</title>
 </head>
