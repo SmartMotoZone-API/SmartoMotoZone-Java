@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" th:replace="~{_layout :: template(~{::title}, ~{::main})}">
+<head>
+    <title>Lista de Funcionários</title>
+</head>
+<body>
+<main>
+    <div class="container mt-4">
+        <div th:if="${sucesso}" class="alert alert-success" th:text="${sucesso}"></div>
+        <div th:if="${erro}" class="alert alert-danger" th:text="${erro}"></div>
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2>Gerenciamento de Funcionários</h2>
+            <a href="/web/funcionarios/novo" class="btn btn-primary">Novo Funcionário</a>
+        </div>
+
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Cargo</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="func : ${page.content}">
+                <td th:text="${func.id}">1</td>
+                <td th:text="${func.nome}">Kaio Cumpian</td>
+                <td th:text="${func.cargo}">Desenvolvedor</td>
+                <td>
+                    <a th:href="@{/web/funcionarios/editar/{id}(id=${func.id})}" class="btn btn-sm btn-warning">Editar</a>
+                    <a th:href="@{/web/funcionarios/deletar/{id}(id=${func.id})}" class="btn btn-sm btn-danger"
+                       onclick="return confirm('Tem certeza que deseja excluir este funcionário?');">Excluir</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+</main>
+</body>
+</html>

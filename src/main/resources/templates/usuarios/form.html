@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" th:replace="~{_layout :: template(~{::title}, ~{::main})}">
+<head>
+    <title th:text="${usuarioDTO.id == null ? 'Novo Usuário' : 'Editar Usuário'}">Formulário de Usuário</title>
+</head>
+<body>
+<main>
+    <div class="container mt-4">
+        <h2 th:text="${usuarioDTO.id == null ? 'Cadastrar Novo Usuário' : 'Editar Usuário'}">Formulário</h2>
+
+        <form th:action="@{/web/usuarios/salvar}" th:object="${usuarioDTO}" method="post" class="card p-4">
+
+            <input type="hidden" th:field="*{id}" />
+
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome Completo</label>
+                <input type="text" class="form-control" th:field="*{nome}" id="nome" required>
+                <div class="text-danger" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="login" class="form-label">Login</label>
+                    <input type="text" class="form-control" th:field="*{login}" id="login" required>
+                    <div class="text-danger" th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" th:field="*{email}" id="email" required>
+                    <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="senha" class="form-label">Senha</label>
+                    <input type="password" class="form-control" th:field="*{senha}" id="senha" th:placeholder="${usuarioDTO.id != null ? 'Deixe em branco para manter' : ''}" th:required="${usuarioDTO.id == null}">
+                    <div class="text-danger" th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}"></div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="perfil" class="form-label">Perfil</label>
+                        <select class="form-select" th:field="*{perfil}" id="perfil" required>
+                            <option th:each="p : ${perfis}" th:value="${p}" th:text="${p}"></option>
+                        </select>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end gap-2">
+                <a href="/web/usuarios" class="btn btn-secondary">Cancelar</a>
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+        </form>
+    </div>
+</main>
+</body>
+</html>

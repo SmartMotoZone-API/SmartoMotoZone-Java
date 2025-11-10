@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" th:replace="~{_layout :: template(~{::title}, ~{::main})}">
+<head>
+    <title>Registrar Movimentação</title>
+</head>
+<body>
+<main>
+    <div class="container mt-4">
+        <h2>Registrar Nova Movimentação</h2>
+
+        <form th:action="@{/web/movimentacoes/salvar}" th:object="${movimentacaoDTO}" method="post" class="card p-4">
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="motoId" class="form-label">Moto</label>
+                    <select class="form-select" th:field="*{motoId}" id="motoId" required>
+                        <option value="">Selecione a moto...</option>
+                        <option th:each="moto : ${motos}" th:value="${moto.id}" th:text="${moto.modelo + ' (' + moto.placa + ')'}"></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="zonaOrigemId" class="form-label">Zona de Origem</label>
+                    <select class="form-select" th:field="*{zonaOrigemId}" id="zonaOrigemId" required>
+                        <option value="">Selecione a origem...</option>
+                        <option th:each="zona : ${zonas}" th:value="${zona.id}" th:text="${zona.descricao}"></option>
+                    </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="zonaDestinoId" class="form-label">Zona de Destino</label>
+                    <select class="form-select" th:field="*{zonaDestinoId}" id="zonaDestinoId" required>
+                        <option value="">Selecione o destino...</option>
+                        <option th:each="zona : ${zonas}" th:value="${zona.id}" th:text="${zona.descricao}"></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="descricao" class="form-label">Descrição</label>
+                <input type="text" class="form-control" th:field="*{descricao}" id="descricao" required>
+            </div>
+
+            <input type="hidden" th:field="*{dataHora}" />
+
+            <div class="d-flex justify-content-end gap-2">
+                <a href="/web/movimentacoes" class="btn btn-secondary">Cancelar</a>
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+        </form>
+    </div>
+</main>
+</body>
+</html>
